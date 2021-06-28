@@ -63,7 +63,7 @@ set autoindent
 set tabstop=4
 set shiftwidth=4
 set smarttab
-set expandtab
+" set expandtab
 set encoding=utf-8
 set showmatch
 set shortmess-=S
