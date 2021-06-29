@@ -204,6 +204,7 @@ let g:deoplete#enable_at_startup = 1
 " echodoc
 "-------------------------------------------------------------------------------
 " Or, you could use neovim's floating text feature.
+set cmdheight=2
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'echo'
 " let g:echodoc#type = 'popup'
