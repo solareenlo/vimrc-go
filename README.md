@@ -1,6 +1,19 @@
 # vimrc-go
 - my `vimrc` for Go
 
+## Usage
+```shell
+# Install goimports
+go get golang.org/x/tools/cmd/goimports
+
+# vim .zshrc
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+
+# 重複パスを登録しない
+typeset -U path PATH
+```
+
 ## References
 ### LSP
 - [golang/tools/gopls/](https://github.com/golang/tools/tree/master/gopls)
