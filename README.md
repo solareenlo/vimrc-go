@@ -6,6 +6,9 @@
 # Install goimports
 go get golang.org/x/tools/cmd/goimports
 
+# Install gopls
+GO111MODULE=on go get golang.org/x/tools/gopls@latest
+
 # vim .zshrc
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
