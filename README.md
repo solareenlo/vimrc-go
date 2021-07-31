@@ -12,9 +12,12 @@ GO111MODULE=on go get golang.org/x/tools/gopls@latest
 # vim .zshrc
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
-
 # 重複パスを登録しない
 typeset -U path PATH
+
+# vim's color
+curl -O https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/scripts/solarized8.sh
+sh solarized8.sh
 ```
 
 ## References
