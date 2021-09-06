@@ -40,6 +40,7 @@ call dein#add('Shougo/echodoc.vim')
 call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
 call dein#add('airblade/vim-gitgutter')
+call dein#add('tpope/vim-surround')
 call dein#add('mattn/vim-goimports')
 call dein#add('buoto/gotests-vim')
 " Required:
