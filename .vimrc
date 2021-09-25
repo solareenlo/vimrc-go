@@ -288,6 +288,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Search and move by any number of {char}
 nmap g/ <Plug>(easymotion-sn)
 
+
 "----------------------------------------------------------
 " Window
 "----------------------------------------------------------
