@@ -18,6 +18,9 @@ typeset -U path PATH
 # vim's color
 curl -O https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/scripts/solarized8.sh
 sh solarized8.sh
+
+# Snippets
+curl https://raw.githubusercontent.com/solareenlo/vimrc-go/main/go.snippets -o .vim/UltiSnips/go.snippets
 ```
 
 ## References
