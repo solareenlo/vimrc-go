@@ -1,3 +1,18 @@
+snippet binarySearch "Calculate binary search"
+func binarySearch(a []int, x int) int {
+	l, r := -1, len(a)
+	for r-l > 1 {
+		c := (l + r) / 2
+		if a[c] >= x {
+			r = c
+		} else {
+			l = c
+		}
+	}
+	return r
+}
+endsnippet
+
 snippet Eratos "Calculate Sieve of Eratosthenes"
 func Eratos(n int) map[int]bool {
 	primes := make(map[int]bool)
@@ -19,8 +34,8 @@ func Eratos(n int) map[int]bool {
 }
 endsnippet
 
-snippet reverse "Reverse string"
-func reverse(s string) string {
+snippet reverseString "Reverse string"
+func reverseString(s string) string {
 	res := []rune(s)
 	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
 		res[i], res[j] = res[j], res[i]
@@ -29,8 +44,8 @@ func reverse(s string) string {
 }
 endsnippet
 
-snippet Next "Calculate Next Permutation"
-func NextPermutation(x sort.Interface) bool {
+snippet nextPermutation "Calculate Next Permutation"
+func nextPermutation(x sort.Interface) bool {
 	n := x.Len() - 1
 	if n < 1 {
 		return false
@@ -85,7 +100,7 @@ func abs(a int) int {
 }
 endsnippet
 
-snippet max2 "Calculate slice max"
+snippet maxSlice "Calculate slice max"
 func max(a ...int) int {
 	res := a[0]
 	for i := range a {
@@ -106,7 +121,7 @@ func max(a, b int) int {
 }
 endsnippet
 
-snippet min2 "Calculate slice min"
+snippet minSlice "Calculate slice min"
 func min(a ...int) int {
 	res := a[0]
 	for i := range a {
