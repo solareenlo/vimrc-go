@@ -88,6 +88,10 @@ endif
 "-------------------------------------------------------------------------------
 " Include user's local vim config
 "-------------------------------------------------------------------------------
+" if filereadable(expand("~/.vimrc_rust"))
+" 	source ~/.vimrc_rust
+" endif
+
 if filereadable(expand("~/.vimrc_go"))
 	source ~/.vimrc_go
 endif
@@ -98,6 +102,10 @@ endif
 
 " if filereadable(expand("~/.vimrc_c"))
 " 	source ~/.vimrc_c
+" endif
+
+" if filereadable(expand("~/.vimrc_42"))
+" 	source ~/.vimrc_42
 " endif
 
 
@@ -220,6 +228,7 @@ let g:echodoc#type = 'echo'
 " To use a custom highlight for the float window,
 " change Pmenu to your highlight group
 highlight link EchoDocFloat Pmenu
+set cmdheight=2
 
 
 "----------------------------------------------------------
