@@ -1,3 +1,43 @@
+snippet in "Set bufio"
+in := bufio.NewReader(os.Stdin)
+endsnippet
+
+snippet out "Set bufout"
+out := bufio.NewWriter(os.Stdout)
+defer out.Flush()
+endsnippet
+
+snippet make "Set make" b
+${1:name}${1/(.+)/ /} := make([]int, n)
+endsnippet
+
+snippet for "Set for loop"
+for i:=0; i<n; i++ {
+}
+endsnippet
+
+snippet scan "Set scan buffer"
+sc.Split(bufio.ScanWords)
+sc.Buffer(make([]byte, 1024), 1048576)
+defer out.Flush()
+
+var sc = bufio.NewScanner(os.Stdin)
+var out = bufio.NewWriter(os.Stdout)
+
+func scanString() string   { sc.Scan(); return sc.Text() }
+func scanRunes() []rune    { return []rune(scanString()) }
+func scanInt() int         { a, _ := strconv.Atoi(scanString()); return a }
+func scanInt64() int64     { a, _ := strconv.ParseInt(scanString(), 10, 64); return a }
+func scanFloat64() float64 { a, _ := strconv.ParseFloat(scanString(), 64); return a }
+func scanInts(n int) []int {
+	a := make([]int, n)
+	for i := 0; i < n; i++ {
+		a[i] = scanInt()
+	}
+	return a
+}
+endsnippet
+
 snippet binarySearch "Calculate binary search"
 func binarySearch(a []int, x int) int {
 	l, r := -1, len(a)
