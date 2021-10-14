@@ -11,8 +11,13 @@ snippet make "Set make" b
 ${1:name}${1/(.+)/ /} := make([]int, n)
 endsnippet
 
-snippet for "Set for loop"
-for i:=0; i<n; i++ {
+snippet fori "for int loop"
+for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
+}
+endsnippet
+
+snippet forj "for int loop"
+for ${2:j} := 0; $2 < ${1:count}; $2${3:++} {
 }
 endsnippet
 
@@ -53,6 +58,22 @@ func binarySearch(a []int, x int) int {
 }
 endsnippet
 
+snippet PrimeFactorization "Calculate Prime factorization"
+func PrimeFactorization(n int) map[int]int {
+	res := make(map[int]int)
+	for i := 2; i*i <= n; i++ {
+		for n%i == 0 {
+			res[i]++
+			n /= i
+		}
+	}
+	if n != 1 {
+		res[n]++
+	}
+	return res
+}
+endsnippet
+
 snippet Eratos "Calculate Sieve of Eratosthenes"
 func Eratos(n int) map[int]bool {
 	primes := make(map[int]bool)
@@ -72,6 +93,10 @@ func Eratos(n int) map[int]bool {
 	}
 	return primes
 }
+endsnippet
+
+snippet reverseInt "Reverse Int slice"
+sort.Sort(sort.Reverse(sort.IntSlice(${1:a})))
 endsnippet
 
 snippet reverseString "Reverse string"
@@ -367,5 +392,50 @@ func (uf *UnionFind) Same(p, q int) bool {
 
 func (uf *UnionFind) Size(x int) int {
 	return uf.size[uf.Root(x)]
+}
+endsnippet
+
+snippet Fenwick "Calculate Fenwick Tree"
+type Fenwick struct {
+	n    int
+	data []uint
+}
+
+func NewFenwick(n int) *Fenwick {
+	fen := &Fenwick{
+		n:    n,
+		data: make([]uint, n),
+	}
+	for idx := range fen.data {
+		fen.data[idx] = 0
+	}
+	return fen
+}
+
+func (fen *Fenwick) Add(pos, x int) {
+	if !(0 <= pos && pos < fen.n) {
+		panic("")
+	}
+	pos++
+	for pos <= fen.n {
+		fen.data[pos-1] += uint(x)
+		pos += pos & -pos
+	}
+}
+
+func (fen *Fenwick) Sum(l, r int) int {
+	if !(0 <= l && l <= r && r <= fen.n) {
+		panic("")
+	}
+	return int(fen.sum(r) - fen.sum(l))
+}
+
+func (fen *Fenwick) sum(r int) uint {
+	s := uint(0)
+	for r > 0 {
+		s += fen.data[r-1]
+		r -= r & -r
+	}
+	return s
 }
 endsnippet
