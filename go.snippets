@@ -177,11 +177,20 @@ func max(a ...int) int {
 }
 endsnippet
 
-snippet max "Calculate max"
+snippet max "Calculate max int"
 func max(a, b int) int {
 	if a > b {
 		return a
 		}
+	return b
+}
+endsnippet
+
+snippet maxString "Calculate max string"
+func max(a, b string) string {
+	if len(a) > len(b) || (len(a) == len(b)) && a > b {
+		return a
+	}
 	return b
 }
 endsnippet
@@ -201,6 +210,15 @@ endsnippet
 snippet min "Calucate min"
 func min(a, b int) int {
 	if a < b {
+		return a
+	}
+	return b
+}
+endsnippet
+
+snippet minString "Calculate min string"
+func min(a, b string) string {
+	if len(a) < len(b) || (len(a) == len(b)) && a < b {
 		return a
 	}
 	return b
