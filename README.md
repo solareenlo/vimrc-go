@@ -20,7 +20,7 @@ curl -O https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/scrip
 sh solarized8.sh
 
 # Snippets
-curl https://raw.githubusercontent.com/solareenlo/vimrc-go/main/go.snippets -o .vim/UltiSnips/go.snippets
+curl https://raw.githubusercontent.com/solareenlo/vimrc-go/main/go.snippets -o ~/.vim/UltiSnips/go.snippets
 ```
 
 ## References
