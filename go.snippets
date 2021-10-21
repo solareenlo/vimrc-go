@@ -7,6 +7,10 @@ out := bufio.NewWriter(os.Stdout)
 defer out.Flush()
 endsnippet
 
+snippet mod "Set mod"
+mod := int(1e9+7)
+endsnippet
+
 snippet make "Set make" b
 ${1:name}${1/(.+)/ /} := make([]int, n)
 endsnippet
@@ -18,6 +22,11 @@ endsnippet
 
 snippet forj "for int loop"
 for ${2:j} := 0; $2 < ${1:count}; $2${3:++} {
+}
+endsnippet
+
+snippet fork "for int loop"
+for ${2:k} := 0; $2 < ${1:count}; $2${3:++} {
 }
 endsnippet
 
@@ -92,6 +101,12 @@ func Eratos(n int) map[int]bool {
 		}
 	}
 	return primes
+}
+endsnippet
+
+snippet reverseOrderInt "Reverse order Int slice"
+for i, j := 0, len(${1:name})-1; i < j; i, j = i+1, j-1 {
+	$1[i], $1[j] = $1[j], $1[i]
 }
 endsnippet
 
@@ -462,5 +477,29 @@ func (fen *Fenwick) sum(r int) uint {
 		r -= r & -r
 	}
 	return s
+}
+endsnippet
+
+snippet ZAlgorithm "Calculate Z Algorithm"
+func ZAlgorithm(s string) []int {
+	n := len(s)
+	z := make([]int, n)
+	z[0] = n
+	for i, j := 1, 0; i < n; {
+		for i+j < n && s[j:j+1] == s[i+j:i+j+1] {
+			j++
+		}
+		z[i] = j
+		if j == 0 {
+			i++
+			continue
+		}
+		k := 1
+		for ; i+k < n && k+z[k] < j; k++ {
+			z[i+k] = z[k]
+		}
+		i, j = i+k, j-k
+	}
+	return z
 }
 endsnippet
