@@ -15,6 +15,12 @@ snippet make "Set make" b
 ${1:name}${1/(.+)/ /} := make([]int, n)
 endsnippet
 
+snippet forr "for int loop"
+for ${2:i} := range ${1:count} {
+	fmt.Scan(&$1[i])
+}
+endsnippet
+
 snippet fori "for int loop"
 for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
 }
@@ -105,8 +111,14 @@ func Eratos(n int) map[int]bool {
 endsnippet
 
 snippet reverseOrderInt "Reverse order Int slice"
-for i, j := 0, len(${1:name})-1; i < j; i, j = i+1, j-1 {
-	$1[i], $1[j] = $1[j], $1[i]
+func reverseOrderInt(a []int) []int {
+	n := len(a)
+	res := make([]int, n)
+	n = copy(res, a)
+	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
+		res[i], res[j] = res[j], res[i]
+	}
+	return res
 }
 endsnippet
 
@@ -324,12 +336,16 @@ func nCrMod(n, r, mod int64) int64 {
 endsnippet
 
 snippet nCrMod2 "Calculate nCr mod"
-var fact, invf [202020]int64
+initMod(mod)
+
+const size = 202020
+
+var fact, invf [size]int64
 
 func initMod(mod int64) {
 	fact[0] = 1
 	invf[0] = 1
-	for i := int64(1); i < 202020; i++ {
+	for i := int64(1); i < size; i++ {
 		fact[i] = (fact[i-1] * i) % mod
 		invf[i] = invMod(fact[i], mod)
 	}
