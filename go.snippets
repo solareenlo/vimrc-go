@@ -11,6 +11,10 @@ snippet mod "Set mod"
 mod := int(1e9+7)
 endsnippet
 
+snippet trim "Print out trim"
+fmt.Println(strings.Trim(fmt.Sprint(res[:n]), "[]"))
+endsnippet
+
 snippet make "Set make" b
 ${1:name}${1/(.+)/ /} := make([]int, n)
 endsnippet
