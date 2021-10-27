@@ -77,6 +77,25 @@ func binarySearch(a []int, x int) int {
 }
 endsnippet
 
+snippet isPrime "Is Prime?"
+func isPrime(n int) bool {
+	if n < 2 {
+		return false
+	} else if n == 2 {
+		return true
+	} else if n%2 == 0 {
+		return false
+	}
+	sqr := int(math.Sqrt(float64(n)))
+	for i := 3; i <= sqr; i += 2 {
+		if n%i == 0 {
+			return false
+		}
+	}
+	return true
+}
+endsnippet
+
 snippet PrimeFactorization "Calculate Prime factorization"
 func PrimeFactorization(n int) map[int]int {
 	res := make(map[int]int)
@@ -188,8 +207,8 @@ func gcd(a, b int) int {
 }
 endsnippet
 
-snippet cntDisits "Calculate disits"
-func cntDisits(n int) int {
+snippet cntDigits "Calculate digits"
+func cntDigits(n int) int {
 	return len(strconv.Itoa(n))
 }
 endsnippet
