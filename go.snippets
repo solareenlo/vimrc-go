@@ -62,6 +62,24 @@ func scanInts(n int) []int {
 }
 endsnippet
 
+snippet lowerBound "Calculate lower bound"
+func lowerBound(a []int, x int) int {
+	idx := sort.Search(len(a), func(i int) bool {
+		return a[i] >= x
+	})
+	return idx
+}
+endsnippet
+
+snippet upperBound "Calculate upper bound"
+func upperBound(a []int, x int) int {
+	idx := sort.Search(len(a), func(i int) bool {
+		return a[i] > x
+	})
+	return idx
+}
+endsnippet
+
 snippet binarySearch "Calculate binary search"
 func binarySearch(a []int, x int) int {
 	l, r := -1, len(a)
