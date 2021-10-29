@@ -314,9 +314,37 @@ func pow(a, n int) int {
 }
 endsnippet
 
+snippet divMod "Calculate a/b mod"
+const mod = 1000000007
+
+func divMod(a, b int) int {
+	ret := a * modInv(b)
+	ret %= mod
+	return ret
+}
+
+func modInv(a int) int {
+	b, u, v := mod, 1, 0
+	for b != 0 {
+		t := a / b
+		a -= t * b
+		a, b = b, a
+		u -= t * v
+		u, v = v, u
+	}
+	u %= mod
+	if u < 0 {
+		u += mod
+	}
+	return u
+}
+endsnippet
+
 snippet powMod "Calculate a^n mod"
-func powMod(a, n, mod int64) int64 {
-	res := int64(1)
+const mod = 1000000007
+
+func powMod(a, n int) int {
+	res := 1
 	for n > 0 {
 		if n%2 == 1 {
 			res = res * a % mod
@@ -329,8 +357,10 @@ func powMod(a, n, mod int64) int64 {
 endsnippet
 
 snippet invMod "Calculate a^{-1} mod"
-func powMod(a, n, mod int64) int64 {
-	res := int64(1)
+const mod = 1000000007
+
+func powMod(a, n int) int {
+	res := 1
 	for n > 0 {
 		if n%2 == 1 {
 			res = res * a % mod
@@ -341,14 +371,16 @@ func powMod(a, n, mod int64) int64 {
 	return res
 }
 
-func invMod(a, mod int64) int64 {
-	return powMod(a, mod-2, mod)
+func invMod(a int) int {
+	return powMod(a, mod-2)
 }
 endsnippet
 
 snippet nCrMod1 "Calculate nCr mod"
-func powMod(a, n, mod int64) int64 {
-	res := int64(1)
+const mod = 1000000007
+
+func powMod(a, n int) int {
+	res := 1
 	for n > 0 {
 		if n%2 == 1 {
 			res = res * a % mod
@@ -359,18 +391,18 @@ func powMod(a, n, mod int64) int64 {
 	return res
 }
 
-func invMod(a, mod int64) int64 {
-	return powMod(a, mod-2, mod)
+func invMod(a int) int {
+	return powMod(a, mod-2)
 }
 
-func nCrMod(n, r, mod int64) int64 {
+func nCrMod(n, r int) int {
 	if n < r || n < 0 || r < 0{
 		return 0
 	}
-	res := int64(1)
-	for i := int64(0); i < r; i++ {
+	res := 1
+	for i := 0; i < r; i++ {
 		res = res * (n - i) % mod
-		res = res * invMod(i+1, mod) % mod
+		res = res * invMod(i+1) % mod
 	}
 	return res
 }
