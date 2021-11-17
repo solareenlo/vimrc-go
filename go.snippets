@@ -239,6 +239,16 @@ func lcm(a, b int) int {
 }
 endsnippet
 
+snippet extGcd "Calculate gcd of (x,y) and (a,b) of a*x+b*y=g"
+func extGcd(x, y int) (int, int, int) {
+	if y == 0 {
+		return x, 1, 0
+	}
+	g, a, b := extGcd(y, x%y)
+	return g, b, a - x/y*b
+}
+endsnippet
+
 snippet gcd "Calculate gcd"
 func gcd(a, b int) int {
 	if b == 0 {
