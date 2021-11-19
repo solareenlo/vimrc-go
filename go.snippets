@@ -166,6 +166,18 @@ func divList(n int) map[int]struct{} {
 }
 endsnippet
 
+snippet sortString "Sort string"
+slice := strings.Split(s, "")
+sort.Strings(slice)
+s = strings.Join(slice, "")
+endsnippet
+
+snippet sortReverseString "Sort reverse string"
+slice := strings.Split(s, "")
+sort.Sort(sort.Reverse(sort.StringSlice(slice)))
+s = strings.Join(slice, "")
+endsnippet
+
 snippet keys "Sort map keys"
 keys := make([]int, 0, len(m))
 for k := range m {
