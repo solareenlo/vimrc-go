@@ -238,6 +238,16 @@ func reverseString(s string) string {
 }
 endsnippet
 
+snippet find "Search x in Slice"
+func find(s []string, x string) bool {
+	pos := sort.SearchStrings(s, x)
+	if pos == len(s) || x != s[pos] {
+		return false
+	}
+	return true
+}
+endsnippet
+
 snippet nextPermutation "Calculate Next Permutation"
 func nextPermutation(x sort.Interface) bool {
 	n := x.Len() - 1
