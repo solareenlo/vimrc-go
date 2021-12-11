@@ -381,6 +381,20 @@ func min(a, b string) string {
 }
 endsnippet
 
+snippet base "Calculate a in base k"
+func base(a, base int) int {
+	res := 0
+	cnt := 0
+	for a > 0 {
+		rem := a % 10
+		res += rem * pow(base, cnt)
+		a /= 10
+		cnt++
+	}
+	return res
+}
+endsnippet
+
 snippet pow "Calculate a^n"
 func pow(a, n int) int {
 	res := 1
