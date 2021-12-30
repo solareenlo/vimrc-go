@@ -626,12 +626,14 @@ snippet UnionFind2 "UF is a data structure that holds a set of data by dividing 
 type UnionFind struct {
 	root []int
 	size []int
+	n    int
 }
 
 func New(size int) *UnionFind {
 	uf := new(UnionFind)
 	uf.root = make([]int, size)
 	uf.size = make([]int, size)
+	n = size
 
 	for i := 0; i < size; i++ {
 		uf.root[i] = i
@@ -671,6 +673,30 @@ func (uf *UnionFind) Same(p, q int) bool {
 
 func (uf *UnionFind) Size(x int) int {
 	return uf.size[uf.Root(x)]
+}
+
+func (uf UnionFind) Groups() [][]int {
+	rootBuf, groupSize := make([]int, uf.n), make([]int, uf.n)
+	for i := 0; i < uf.n; i++ {
+		rootBuf[i] = uf.Root(i)
+		groupSize[rootBuf[i]]++
+	}
+	res := make([][]int, uf.n)
+	for i := 0; i < uf.n; i++ {
+		res[i] = make([]int, 0, groupSize[i])
+	}
+	for i := 0; i < uf.n; i++ {
+		res[rootBuf[i]] = append(res[rootBuf[i]], i)
+	}
+	result := make([][]int, 0, uf.n)
+	for i := 0; i < uf.n; i++ {
+		if len(res[i]) != 0 {
+			r := make([]int, len(res[i]))
+			copy(r, res[i])
+			result = append(result, r)
+		}
+	}
+	return result
 }
 endsnippet
 
