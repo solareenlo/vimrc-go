@@ -8,7 +8,11 @@ defer out.Flush()
 endsnippet
 
 snippet mod "Set mod"
-mod := int(1e9+7)
+const mod = 1_000_000_007
+endsnippet
+
+snippet mod9 "Set mod 998244353"
+const mod = 998244353
 endsnippet
 
 snippet trim "Print out trim"
@@ -638,7 +642,7 @@ type UnionFind struct {
 	n    int
 }
 
-func New(size int) *UnionFind {
+func NewUnionFind(size int) *UnionFind {
 	uf := new(UnionFind)
 	uf.root = make([]int, size)
 	uf.size = make([]int, size)
@@ -2467,5 +2471,11 @@ func (pq *PriorityQueue) update(item *Item, value int, priority int) {
 	item.value = value
 	item.priority = priority
 	heap.Fix(pq, item.index)
+}
+endsnippet
+
+snippet ctz "Calculate __builtin_ctz"
+func ctz(x int) int {
+	return bits.TrailingZeros64(uint64(x))
 }
 endsnippet
