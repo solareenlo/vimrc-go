@@ -63,6 +63,10 @@ func unique(a []int) []int {
 		}
 	}
 	sort.Ints(result)
+	n := len(result)
+	for i := 0; i < n; i++ {
+		a[i] = result[i]
+	}
 	return result
 }
 endsnippet
@@ -1274,6 +1278,10 @@ func (q *Mfgraph) MinCut(s int) []bool {
 endsnippet
 
 snippet convolution "Calculate convolution"
+const mod = 998244353
+
+var con = NewConvolution(mod, 3)
+
 func powMod(a, e, mod int) int {
 	res, m := 1, a
 	for e > 0 {
