@@ -179,6 +179,25 @@ func PrimeFactorization(n int) map[int]int {
 }
 endsnippet
 
+snippet Factorization "Calculate Factorization"
+func Factorization(n int) []int {
+	num := n
+	var res []int
+	for i := 2; i*i <= n; i++ {
+		if num%i == 0 {
+			num = num / i
+			res = append(res, i)
+			i = 1
+		}
+	}
+
+	if num > 1 {
+		res = append(res, num)
+	}
+	return res
+}
+endsnippet
+
 snippet Eratos "Calculate Sieve of Eratosthenes"
 func Eratos(n int) map[int]bool {
 	primes := make(map[int]bool)
