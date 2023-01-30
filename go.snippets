@@ -1486,8 +1486,6 @@ endsnippet
 snippet convolution "Calculate convolution"
 const mod = 998244353
 
-var con = NewConvolution(mod, 3)
-
 func powMod(a, e, mod int) int {
 	res, m := 1, a
 	for e > 0 {
@@ -1499,6 +1497,8 @@ func powMod(a, e, mod int) int {
 	}
 	return res
 }
+
+var con = NewConvolution(mod, 3)
 
 type Convolution struct {
 	mod, primroot, rank2                      int
@@ -1580,11 +1580,11 @@ func (q *Convolution) butterfly(a []int) {
 				for i := 0; i < p; i++ {
 					mod2 := mod * mod
 					a0 := a[i+offset]
-					a1 := a[i+offset+p] * rot
-					a2 := a[i+offset+2*p] * rot2
-					a3 := a[i+offset+3*p] * rot3
-					a1na3imag := (a1 + mod2 - a3) % mod * imag
-					na2 := mod2 - a2
+					a1 := a[i+offset+p] * rot % mod
+					a2 := a[i+offset+2*p] * rot2 % mod
+					a3 := a[i+offset+3*p] * rot3 % mod
+					a1na3imag := (a1 + mod2 - a3) % mod * imag % mod
+					na2 := (mod2 - a2 + mod) % mod
 					a[i+offset] = (a0 + a2 + a1 + a3) % mod
 					a[i+offset+p] = (a0 + a2 + (2*mod2 - a1 - a3)) % mod
 					a[i+offset+2*p] = (a0 + na2 + a1na3imag) % mod
@@ -1614,7 +1614,7 @@ func (q *Convolution) butterflyInv(a []int) {
 					l := a[i+offset]
 					r := a[i+offset+p]
 					a[i+offset] = (l + r) % mod
-					a[i+offset+p] = (l - r + mod) % mod
+					a[i+offset+p] = ((l - r + mod) % mod) * irot % mod
 				}
 				if s+1 != (1 << (len - 1)) {
 					irot = irot * q.irate2[bits.TrailingZeros(^uint(s))] % mod
@@ -1634,11 +1634,11 @@ func (q *Convolution) butterflyInv(a []int) {
 					a1 := a[i+offset+p]
 					a2 := a[i+offset+2*p]
 					a3 := a[i+offset+3*p]
-					a2na3iimag := (mod + a2 - a3) * iimag % mod
-					a[i+offset] = (a0 + a1 + a2 + a3) % mod
-					a[i+offset+p] = (a0 + (mod - a1) + a2na3iimag) * irot % mod
-					a[i+offset+2*p] = (a0 + a1 + (mod - a2) + (mod - a3)) * irot2 % mod
-					a[i+offset+3*p] = (a0 + (mod - a1) + (mod - a2na3iimag)) * irot3 % mod
+					a2na3iimag := ((a2 - a3 + mod) % mod) * iimag % mod
+					a[i+offset] = ((a0+a1)%mod + (a2+a3)%mod) % mod
+					a[i+offset+p] = ((a0 - a1 + mod + a2na3iimag) % mod) * irot % mod
+					a[i+offset+2*p] = ((a0 + a1 - a2 - a3 + mod + mod) % mod) * irot2 % mod
+					a[i+offset+3*p] = ((a0-a1+mod)%mod + (mod-a2na3iimag)%mod) * irot3 % mod
 				}
 				if s+1 != (1 << (len - 2)) {
 					irot = irot * q.irate3[bits.TrailingZeros(^uint(s))] % mod
@@ -1646,10 +1646,6 @@ func (q *Convolution) butterflyInv(a []int) {
 			}
 			len -= 2
 		}
-	}
-	iz := powMod(n, mod-2, mod)
-	for i := 0; i < n; i++ {
-		a[i] = a[i] * iz % mod
 	}
 }
 
