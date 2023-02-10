@@ -27,6 +27,16 @@ func replaceAtIndex(in string, r rune, i int) string {
 }
 endsnippet
 
+snippet log2 "Calculate log2(n)"
+func log2(n int) int {
+	var k int
+	for k = 0; n != 0; n >>= 1 {
+		k++
+	}
+	return k - 1
+}
+endsnippet
+
 snippet make "Set make" b
 ${1:name}${1/(.+)/ /} := make([]int, n)
 endsnippet
@@ -231,6 +241,23 @@ func divList(n int) map[int]struct{} {
 		}
 	}
 	return div
+}
+endsnippet
+
+snippet transpose "Transposing Slice"
+func transpose(slice [][]string) [][]string {
+	xl := len(slice[0])
+	yl := len(slice)
+	result := make([][]string, xl)
+	for i := range result {
+		result[i] = make([]string, yl)
+	}
+	for i := 0; i < xl; i++ {
+		for j := 0; j < yl; j++ {
+			result[i][j] = slice[j][i]
+		}
+	}
+	return result
 }
 endsnippet
 
