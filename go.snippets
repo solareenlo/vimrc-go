@@ -140,17 +140,18 @@ func upperBound(a []int, x int) int {
 endsnippet
 
 snippet binarySearch "Calculate binary search"
-func binarySearch(a []int, x int) int {
-	l, r := -1, len(a)
-	for r-l > 1 {
-		c := (l + r) / 2
-		if a[c] >= x {
-			r = c
-		} else {
-			l = c
+func binarySearch(numbers []int, leftBound, rightBound, numberToFind int) int {
+	if rightBound >= leftBound {
+		midPoint := leftBound + (rightBound-leftBound)/2
+		if numbers[midPoint] == numberToFind {
+			return midPoint
 		}
+		if numbers[midPoint] > numberToFind {
+			return binarySearch(numbers, leftBound, midPoint-1, numberToFind)
+		}
+		return binarySearch(numbers, midPoint+1, rightBound, numberToFind)
 	}
-	return r
+	return -1
 }
 endsnippet
 
