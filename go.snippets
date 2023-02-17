@@ -1008,7 +1008,7 @@ func newSegtree(n int, e E, op Op) *Segtree {
 		seg.d[i] = seg.e()
 	}
 	for i := 0; i < seg.n; i++ {
-		seg.d[seg.size+i] = i
+		seg.d[seg.size+i] = seg.e()
 	}
 	for i := seg.size - 1; i >= 1; i-- {
 		seg.Update(i)
