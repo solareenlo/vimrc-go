@@ -31,6 +31,19 @@ func replaceAtIndex(in string, r rune, i int) string {
 }
 endsnippet
 
+snippet resize "Set resize"
+func resize(a *[]int, n int) {
+	if len(*a) > n {
+		*a = (*a)[:n]
+	} else {
+		n = n - len(*a)
+		for i := 0; i < n; i++ {
+			*a = append(*a, 0)
+		}
+	}
+}
+endsnippet
+
 snippet log2 "Calculate log2(n)"
 func log2(n int) int {
 	var k int
@@ -38,6 +51,40 @@ func log2(n int) int {
 		k++
 	}
 	return k - 1
+}
+endsnippet
+
+snippet memset "memset"
+func memset(data []int, value int) {
+	if value == 0 {
+		for i := range data {
+			data[i] = 0
+		}
+	} else if len(data) != 0 {
+		data[0] = value
+
+		for i := 1; i < len(data); i *= 2 {
+			copy(data[i:], data[:i])
+		}
+	}
+}
+endsnippet
+
+snippet memcpy "memcpy"
+//#include <string.h>
+import "C"
+import "unsafe"
+
+func memcpy(dest, src []int) int {
+	n := len(src)
+	if len(dest) < len(src) {
+		n = len(dest)
+	}
+	if n == 0 {
+		return 0
+	}
+	C.memcpy(unsafe.Pointer(&dest[0]), unsafe.Pointer(&src[0]), C.size_t(n*int(reflect.TypeOf(src[0]).Size())))
+	return n
 }
 endsnippet
 
@@ -709,6 +756,27 @@ func nCrMod(n, r int) int {
 		return 0
 	}
 	return fact[n] * invf[r] % mod * invf[n-r] % mod
+}
+endsnippet
+
+snippet HeapPair "Set Heap Pair"
+type pair struct {
+	x,y int
+}
+
+type HeapPair []pair
+
+func (h HeapPair) Len() int { return len(h) }
+func (h HeapPair) Less(i, j int) bool { return h[i].x < h[j].x }
+func (h HeapPair) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+func (h *HeapPair) Push(x interface{}) { *h = append(*h, x.(pair)) }
+
+func (h *HeapPair) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
 }
 endsnippet
 
