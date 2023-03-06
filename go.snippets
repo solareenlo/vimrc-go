@@ -113,6 +113,15 @@ for ${2:k} := 0; $2 < ${1:count}; $2${3:++} {
 }
 endsnippet
 
+snippet sortPair "sort pair"
+sort.Slice(tmp, func(i,j int)bool{
+	if tmp[i].x == tmp[j].x {
+		return tmp[i].y < tmp[j].y
+	}
+	return tmp[i].x < tmp[j].x
+})
+endsnippet
+
 snippet unique "Calculate unique"
 func unique(a []int) []int {
 	occurred := map[int]bool{}
