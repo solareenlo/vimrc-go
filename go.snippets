@@ -19,6 +19,10 @@ snippet mod7 "Set mod 1000000007"
 const mod = 1000000007
 endsnippet
 
+snippet INF "Set inf"
+const INF = int(1e18)
+endsnippet
+
 snippet trim "Print out trim"
 fmt.Println(strings.Trim(fmt.Sprint(res[:n]), "[]"))
 endsnippet
@@ -178,6 +182,18 @@ sort.Slice(ds, func(i, j int) bool {
 		return ds[i][1] < ds[j][1]
 	}
 	return ds[i][0] < ds[j][0]
+})
+endsnippet
+
+snippet sortTuple "Sort Tuple"
+sort.Slice(tup, func(i, j int) bool {
+	if tup[i].x == tup[j].x {
+		if tup[i].y == tup[j].y {
+			return tup[i].z < tup[j].z
+		}
+		return tup[i].y < tup[j].y
+	}
+	return tup[i].x < tup[j].x
 })
 endsnippet
 
@@ -524,6 +540,26 @@ func swapSlice(bs []byte, i, j int) []byte {
 	copy(res, bs)
 	res[i], res[j] = res[j], res[i]
 	return res
+}
+endsnippet
+
+snippet chmin "Change min"
+func chmin(a *int, b int) bool {
+	if *a > b {
+		*a = b
+		return true
+	}
+	return false
+}
+endsnippet
+
+snippet chmax "Change max"
+func chmax(a *int, b int) bool {
+	if *a < b {
+		*a = b
+		return true
+	}
+	return false
 }
 endsnippet
 
