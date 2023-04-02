@@ -3333,7 +3333,13 @@ func matPowMod(A [][]int, n int) [][]int {
 }
 endsnippet
 
-snippet clz "Calculate Count Leading Zeros"
+snippet clz32 "Calculate Count Leading Zeros"
+func clz(x uint64) int {
+	return bits.LeadingZeros32(x)
+}
+endsnippet
+
+snippet clz64 "Calculate Count Leading Zeros"
 func clz(x uint64) int {
 	return bits.LeadingZeros64(x)
 }
