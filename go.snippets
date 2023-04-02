@@ -1767,7 +1767,17 @@ func powMod(a, e, mod int) int {
 	return res
 }
 
-var con = NewConvolution(mod, 3)
+const root = 3
+
+var con = NewConvolution(mod, root)
+
+// 特殊な剰余と原始根
+// (924844033, 5)
+// (998244353, 3)
+// (1012924417, 5)
+// (167772161, 3)
+// (469762049, 3)
+// (1224736769, 3)
 
 type Convolution struct {
 	mod, primroot, rank2                      int
@@ -2003,7 +2013,17 @@ func powMod(a, e, mod int) int {
 	return res
 }
 
-var con = NewConvolution(mod, 3)
+const root = 3
+
+var con = NewConvolution(mod, root)
+
+// 特殊な剰余と原始根
+// (924844033, 5)
+// (998244353, 3)
+// (1012924417, 5)
+// (167772161, 3)
+// (469762049, 3)
+// (1224736769, 3)
 
 type Convolution struct {
 	mod, primroot, rank2                      int
