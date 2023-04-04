@@ -29,6 +29,12 @@ type pair struct {
 }
 endsnippet
 
+snippet tuple "Set tuple"
+type tuple struct {
+	x, y, z int
+}
+endsnippet
+
 snippet trim "Print out trim"
 fmt.Println(strings.Trim(fmt.Sprint(res[:n]), "[]"))
 endsnippet
@@ -142,7 +148,7 @@ func unique(a []int) []int {
 			result = append(result, a[i])
 		}
 	}
-	sort.Ints(result)
+	// sort.Ints(result)
 	n := len(result)
 	for i := 0; i < n; i++ {
 		a[i] = result[i]
@@ -396,6 +402,18 @@ snippet reverseOrderInt "Reverse order Int slice"
 func reverseOrderInt(a []int) []int {
 	n := len(a)
 	res := make([]int, n)
+	n = copy(res, a)
+	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
+		res[i], res[j] = res[j], res[i]
+	}
+	return res
+}
+endsnippet
+
+snippet reverseOrderString "Reverse order String slice"
+func reverseOrderString(a []string) []string {
+	n := len(a)
+	res := make([]string, n)
 	n = copy(res, a)
 	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
 		res[i], res[j] = res[j], res[i]
