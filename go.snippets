@@ -889,6 +889,27 @@ func (h *HeapPair) Pop() interface{} {
 }
 endsnippet
 
+snippet HeapTuple "Set Heap Tuple"
+type tuple struct {
+	x, y, z int
+}
+
+type HeapTuple []tuple
+
+func (h HeapTuple) Len() int            { return len(h) }
+func (h HeapTuple) Less(i, j int) bool  { return h[i].x < h[j].x }
+func (h HeapTuple) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *HeapTuple) Push(x interface{}) { *h = append(*h, x.(tuple)) }
+
+func (h *HeapTuple) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[:n-1]
+	return x
+}
+endsnippet
+
 snippet Heap "Heap is a common way to implement a priority queue."
 type Heap []int
 
