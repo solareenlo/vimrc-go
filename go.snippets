@@ -74,6 +74,12 @@ func log2(n int) int {
 }
 endsnippet
 
+snippet clz "Calculate count leading zeros"
+func countLeadingZeros(x uint64) int {
+	return bits.LeadingZeros64(x)
+}
+endsnippet
+
 snippet memset "memset"
 func memset(data []int, value int) {
 	if value == 0 {
