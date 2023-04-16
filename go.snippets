@@ -167,6 +167,22 @@ func unique(a []int) []int {
 }
 endsnippet
 
+snippet unique2 "Calculate unique"
+func unique(a []int) []int {
+	if len(a) < 2 {
+		return a
+	}
+	res := make([]int, 0, len(a))
+	res = append(res, a[0])
+	for i := 1; i < len(a); i++ {
+		if a[i] != a[i-1] {
+			res = append(res, a[i])
+		}
+	}
+	return res
+}
+endsnippet
+
 snippet uniquePair "Calculate unique pair"
 type pair struct {
 	x, y int
