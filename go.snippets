@@ -139,6 +139,11 @@ for ${2:k} := 0; $2 < ${1:count}; $2${3:++} {
 }
 endsnippet
 
+snippet rfori "rfor int loop"
+for ${2:i} := len(${1:count}) - 1; $2 >= 0; $2${3:--} {
+}
+endsnippet
+
 snippet sortPair "sort pair"
 sort.Slice(tmp, func(i,j int)bool{
 	if tmp[i].x == tmp[j].x {
@@ -469,6 +474,40 @@ func find(s []string, x string) bool {
 		return false
 	}
 	return true
+}
+endsnippet
+
+snippet insert "Insert to index in Slice"
+func insert(a *[]int, index int, value int) []int {
+	n := len(*a)
+	if index < 0 {
+		index = (index%n + n) % n
+	}
+	switch {
+	case index == n:
+		return append(*a, value)
+
+	case index < n:
+		*a = append((*a)[:index+1], (*a)[index:]...)
+		(*a)[index] = value
+		return *a
+
+	case index < cap(*a):
+		*a = (*a)[:index+1]
+		for i := n; i < index; i++ {
+			(*a)[i] = 0
+		}
+		(*a)[index] = value
+		return *a
+
+	default:
+		b := make([]int, index+1)
+		if n > 0 {
+			copy(b, *a)
+		}
+		b[index] = value
+		return b
+	}
 }
 endsnippet
 
