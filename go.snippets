@@ -1239,7 +1239,7 @@ func (t BIT) LowerBound(x int) int {
 }
 endsnippet
 
-snippet Fenwick "Calculate Fenwick Tree"
+snippet fenwick_tree "Calculate Fenwick Tree"
 type Fenwick struct {
 	n    int
 	data []uint
@@ -1308,7 +1308,7 @@ func ZAlgorithm(s string) []int {
 }
 endsnippet
 
-snippet SegTreeInt "Calculate segment tree"
+snippet segtreeInt "Calculate segment tree"
 type E func() int
 type Op func(a, b int) int
 type Compare func(v int) bool
@@ -1321,7 +1321,7 @@ type SegTree struct {
 	op   Op
 }
 
-func newSegTree(n int, e E, op Op) *SegTree {
+func NewSegTree(n int, e E, op Op) *SegTree {
 	seg := new(SegTree)
 	seg.n = n
 	seg.log = seg.ceilPow2(seg.n)
@@ -1468,7 +1468,7 @@ func (seg *SegTree) ceilPow2(n int) int {
 }
 endsnippet
 
-snippet SegTreeString "Calculate segment tree"
+snippet segtreeString "Calculate segment tree"
 type E func() int
 type Op func(a, b int) int
 type Compare func(v int) bool
@@ -1481,7 +1481,7 @@ type SegTree struct {
 	op   Op
 }
 
-func newSegTree(v []string, e E, op Op) *SegTree {
+func NewSegTree(v []string, e E, op Op) *SegTree {
 	seg := new(SegTree)
 	seg.n = len(v)
 	seg.log = seg.ceilPow2(seg.n)
@@ -2780,7 +2780,7 @@ func SAIS(ss []int, upper, thresholdNaive, thresholdDoubling int) []int {
 }
 endsnippet
 
-snippet LazySegTree "Calculate lazy seg tree"
+snippet lazy_segtree "Calculate lazy seg tree"
 type P struct{ x, y int }
 
 type F struct{ d int }
@@ -3160,7 +3160,7 @@ func floor_sum(n, m, a, b int) int {
 endsnippet
 
 snippet mcf_graph "Calculate min cost flow"
-g := newMinCostFlow(n)
+g := NewMinCostFlow(n)
 type MinCostFlow struct {
 	n   int
 	pos [][2]int
@@ -3169,7 +3169,7 @@ type MinCostFlow struct {
 type _Edge struct{ to, rev, capa, cost int }
 type Edge struct{ from, to, capa, flow, cost int }
 
-func newMinCostFlow(n int) *MinCostFlow {
+func NewMinCostFlow(n int) *MinCostFlow {
 	return &MinCostFlow{n: n, g: make([][]_Edge, n)}
 }
 func (mcf *MinCostFlow) AddEdge(from, to, capa, cost int) int {
