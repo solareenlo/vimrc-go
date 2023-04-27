@@ -7,16 +7,12 @@ out := bufio.NewWriter(os.Stdout)
 defer out.Flush()
 endsnippet
 
-snippet mod "Set mod"
-const mod = 1_000_000_007
-endsnippet
-
 snippet mod9 "Set mod 998244353"
-const mod = 998244353
+const MOD = 998244353
 endsnippet
 
 snippet mod7 "Set mod 1000000007"
-const mod = 1000000007
+const MOD = 1000000007
 endsnippet
 
 snippet INF "Set inf"
@@ -61,6 +57,12 @@ func resize(a *[]int, n int) {
 			*a = append(*a, 0)
 		}
 	}
+}
+endsnippet
+
+snippet popcount "Calculate popcount"
+func popcount(n uint32) int {
+	return bits.OnesCount32(n)
 }
 endsnippet
 
