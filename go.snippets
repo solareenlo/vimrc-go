@@ -283,15 +283,45 @@ func sortSlice3(tmp [][]int) {
 endsnippet
 
 snippet sortTuple "Sort Tuple"
-sort.Slice(tup, func(i, j int) bool {
-	if tup[i].x == tup[j].x {
-		if tup[i].y == tup[j].y {
-			return tup[i].z < tup[j].z
+type tuple struct {
+	x, y, z int
+}
+
+func sortTuple(tup []tuple) {
+	sort.Slice(tup, func(i, j int) bool {
+		if tup[i].x == tup[j].x {
+			if tup[i].y == tup[j].y {
+				return tup[i].z < tup[j].z
+			}
+			return tup[i].y < tup[j].y
 		}
-		return tup[i].y < tup[j].y
-	}
-	return tup[i].x < tup[j].x
-})
+		return tup[i].x < tup[j].x
+	})
+}
+endsnippet
+
+snippet lowerBoundPair "Calculate lower bound pair"
+func lowerBoundPair(a []pair, x pair) int {
+	idx := sort.Search(len(a), func(i int) bool {
+		if a[i].x == x.x {
+			return a[i].y >= x.y
+		}
+		return a[i].x >= x.x
+	})
+	return idx
+}
+endsnippet
+
+snippet upperBoundPair "Calculate lower bound pair"
+func upperBoundPair(a []pair, x pair) int {
+	idx := sort.Search(len(a), func(i int) bool {
+		if a[i].x == x.x {
+			return a[i].y > x.y
+		}
+		return a[i].x > x.x
+	})
+	return idx
+}
 endsnippet
 
 snippet lowerBound "Calculate lower bound"
@@ -1993,6 +2023,7 @@ var con = NewConvolution(mod, root)
 // (167772161, 3)
 // (469762049, 3)
 // (1224736769, 3)
+// (1107296257, 10)
 
 type Convolution struct {
 	mod, primroot, rank2                      int
