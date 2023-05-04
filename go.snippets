@@ -257,16 +257,29 @@ func erase(a []int, pos int) []int {
 }
 endsnippet
 
-snippet sortSlice3 "Calculate sort.Slice 3"
-sort.Slice(ds, func(i, j int) bool {
-	if ds[i][0] == ds[j][0] {
-		if ds[i][1] == ds[j][1] {
-			return ds[i][2] < ds[j][2]
+snippet sortSlice2 "Calculate sort.Slice 2"
+func sortSlice2(tmp [][]int) {
+	sort.Slice(tmp, func(i, j int) bool {
+		if tmp[i][0] == tmp[j][0] {
+			return tmp[i][1] < tmp[j][1]
 		}
-		return ds[i][1] < ds[j][1]
-	}
-	return ds[i][0] < ds[j][0]
-})
+		return tmp[i][0] < tmp[j][0]
+	})
+}
+endsnippet
+
+snippet sortSlice3 "Calculate sort.Slice 3"
+func sortSlice3(tmp [][]int) {
+	sort.Slice(tmp, func(i, j int) bool {
+		if tmp[i][0] == tmp[j][0] {
+			if tmp[i][1] == tmp[j][1] {
+				return tmp[i][2] < tmp[j][2]
+			}
+			return tmp[i][1] < tmp[j][1]
+		}
+		return tmp[i][0] < tmp[j][0]
+	})
+}
 endsnippet
 
 snippet sortTuple "Sort Tuple"
@@ -866,7 +879,7 @@ func powMod(a mint, n int) mint {
 }
 
 func invMod(a mint) mint {
-	return PowMod(a, MOD-2)
+	return powMod(a, MOD-2)
 }
 
 func divMod(a, b mint) mint {
