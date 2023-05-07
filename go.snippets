@@ -151,6 +151,33 @@ for ${2:j} := ${1:count} - 1; $2 >= 0; $2${3:--} {
 }
 endsnippet
 
+snippet bitset "Set bitset"
+var dp [101]*big.Int
+for i := range dp {
+	dp[i] = big.NewInt(0)
+}
+
+func lsh(A *big.Int, x uint) *big.Int {
+	return new(big.Int).Lsh(A, x)
+}
+
+func rsh(A *big.Int, x uint) *big.Int {
+	return new(big.Int).Rsh(A, x)
+}
+
+func and(A, B *big.Int) *big.Int {
+	return new(big.Int).And(A, B)
+}
+
+func or(A, B *big.Int) *big.Int {
+	return new(big.Int).Or(A, B)
+}
+
+func xor(A, B *big.Int) *big.Int {
+	return new(big.Int).Xor(A, B)
+}
+endsnippet
+
 snippet sortPair "sort pair"
 type pair struct {
 	x, y int
@@ -2244,7 +2271,7 @@ func (q *Convolution) Convolve(a []int, b []int) []int {
 }
 endsnippet
 
-snippet butterflyInv "Calculate convolution"
+snippet butterfly_inv "Calculate convolution"
 const mod = 998244353
 
 func powMod(a, e, mod int) int {
@@ -2270,6 +2297,7 @@ var con = NewConvolution(mod, root)
 // (167772161, 3)
 // (469762049, 3)
 // (1224736769, 3)
+// (1107296257, 10)
 
 type Convolution struct {
 	mod, primroot, rank2                      int
