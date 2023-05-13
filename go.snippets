@@ -3727,3 +3727,90 @@ func (d *dsu) Groups() [][]int {
 	return eraseEmpty(result)
 }
 endsnippet
+
+snippet set "Set"
+// 0 以上 2 ^ (6D) 未満の整数を取れる
+// D : 3 -> 2.6 * 10 ^ 5
+// D : 4 -> 1.6 * 10 ^ 7
+// D : 5 -> 1.0 * 10 ^ 9
+// D : 6 -> int の範囲全部
+const D = 3
+
+type FastSet struct {
+	n int
+	a [D][]uint64
+}
+
+func (set *FastSet) init(n_ int) {
+	set.n = n_
+	for i := 0; i < D; i++ {
+		n_ = (n_ + 63) >> 6
+		set.a[i] = make([]uint64, n_)
+	}
+}
+
+func (set FastSet) empty() bool { return set.a[D-1][0] == 0 }
+
+func (set FastSet) contains(x int) bool {
+	return ((set.a[0][x>>6] >> (x & 63)) & 1) == 1
+}
+
+func (set *FastSet) insert(x int) {
+	for i := 0; i < D; i++ {
+		y := x & 63
+		x >>= 6
+		set.a[i][x] |= uint64(1 << y)
+	}
+}
+
+func (set *FastSet) erase(x int) {
+	for i := 0; i < D; i++ {
+		y := x & 63
+		x >>= 6
+		set.a[i][x] &= ^uint64(1 << y)
+		if set.a[i][x] != 0 {
+			break
+		}
+	}
+}
+
+func (set FastSet) next(x int) int {
+	for i := 0; i < D; i++ {
+		k := x >> 6
+		y := x & 63
+		if k >= len(set.a[i]) {
+			return set.n
+		}
+		top := set.a[i][k] >> y
+		if top != 0 {
+			x += ctz(uint64(top))
+			for j := i - 1; j >= 0; j-- {
+				x = x<<6 | ctz(set.a[j][x])
+			}
+			return x
+		}
+		x = k + 1
+	}
+	return set.n
+}
+
+func (set FastSet) prev(x int) int {
+	for i := 0; i < D; i++ {
+		if x < 0 {
+			return -1
+		}
+		k := x >> 6
+		y := x & 63
+		bot := set.a[i][k] << (63 - y)
+		if bot != 0 {
+			x -= clz(bot)
+			for j := i - 1; j >= 0; j-- {
+				x = x<<6 | (63 - clz(set.a[j][x]))
+			}
+			return x
+		}
+		x = k - 1
+	}
+	return -1
+}
+endsnippet
