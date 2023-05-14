@@ -284,6 +284,15 @@ func erase(a []int, pos int) []int {
 }
 endsnippet
 
+snippet eraseRange "erase slice from start to end"
+func eraseRange(s []int, start int, end int) []int {
+	// スライスの一部を削除する
+	copy(s[start:], s[end:])
+	// 新しいスライスを返す
+	return s[:len(s)-(end-start)]
+}
+endsnippet
+
 snippet sortSlice2 "Calculate sort.Slice 2"
 func sortSlice2(tmp [][]int) {
 	sort.Slice(tmp, func(i, j int) bool {
