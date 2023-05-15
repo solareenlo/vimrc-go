@@ -3040,7 +3040,7 @@ func (lseg *LazySegTree) push(k int) {
 }
 func (lseg *LazySegTree) Set(p int, x P) {
 	p += lseg.size
-	for i := lseg.log; i <= 1 && i >= 0; i-- {
+	for i := lseg.log; i >= 1; i-- {
 		lseg.push(p >> i)
 	}
 	lseg.d[p] = x
