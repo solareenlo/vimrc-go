@@ -3826,3 +3826,74 @@ func (set FastSet) prev(x int) int {
 	return -1
 }
 endsnippet
+
+snippet lessThanSlice "Compare Slices"
+func lessThanSlices(s1, s2 []int) bool {
+	minLength := len(s1)
+	if len(s2) < minLength {
+		minLength = len(s2)
+	}
+
+	for i := 0; i < minLength; i++ {
+		if s1[i] < s2[i] {
+			return true // s1がs2よりも小さい
+		} else if s1[i] > s2[i] {
+			return false // s1がs2よりも大きい
+		}
+	}
+
+	if len(s1) == len(s2) {
+		return false // スライスは等しい
+	} else if len(s1) < len(s2) {
+		return true // s1がs2よりも小さい
+	}
+
+	return false // s1がs2よりも大きい
+}
+endsnippet
+
+snippet combination "Set nCr"
+var comb Combination
+
+type Combination struct {
+	mod        int
+	size       int
+	fact, invf []int
+}
+
+func (c *Combination) init(size, mod int) {
+	c.mod = mod
+	c.size = size
+	c.fact = make([]int, c.size)
+	c.invf = make([]int, c.size)
+	c.fact[0] = 1
+	c.invf[0] = 1
+	for i := int(1); i < c.size; i++ {
+		c.fact[i] = (c.fact[i-1] * i) % c.mod
+		c.invf[i] = c.invMod(c.fact[i])
+	}
+}
+
+func (c Combination) powMod(a, n int) int {
+	res := int(1)
+	for n > 0 {
+		if n%2 == 1 {
+			res = res * a % c.mod
+		}
+		a = a * a % c.mod
+		n /= 2
+	}
+	return res
+}
+
+func (c Combination) invMod(a int) int {
+	return c.powMod(a, c.mod-2)
+}
+
+func (c Combination) nCrMod(n, r int) int {
+	if n < r || n < 0 || r < 0 {
+		return 0
+	}
+	return c.fact[n] * c.invf[r] % c.mod * c.invf[n-r] % c.mod
+}
+endsnippet
