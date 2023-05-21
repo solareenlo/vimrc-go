@@ -871,15 +871,19 @@ func base(a, base int) int {
 endsnippet
 
 snippet getLine "Scan line"
-var in = bufio.NewScanner(os.Stdin)
+var reader = bufio.NewReader(os.Stdin)
 
 func getLine() string {
-	in.Scan()
-	return in.Text()
+	line, err := reader.ReadString('\n')
+	if err != nil {
+		return ""
+	}
+	return line[:len(line)-1]
 }
 
 func getInt() int {
-	i, e := strconv.Atoi(getLine())
+	tmp := getLine()
+	i, e := strconv.Atoi(tmp)
 	if e != nil {
 		panic(e)
 	}
