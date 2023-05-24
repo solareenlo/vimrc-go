@@ -2546,6 +2546,14 @@ func (q *Convolution2) butterflyInv(a []mint) {
 		}
 	}
 }
+
+func ceilPow2(n int) int {
+	x := 0
+	for (1 << uint(x)) < n {
+		x++
+	}
+	return x
+}
 endsnippet
 
 snippet two_sat "Calculate 2-SAT"
@@ -3899,5 +3907,17 @@ func (c Combination) nCrMod(n, r int) int {
 		return 0
 	}
 	return c.fact[n] * c.invf[r] % c.mod * c.invf[n-r] % c.mod
+}
+endsnippet
+
+snippet count "Count"
+func count(slice []int, target int) int {
+	count := 0
+	for _, num := range slice {
+		if num == target {
+			count++
+		}
+	}
+	return count
 }
 endsnippet
