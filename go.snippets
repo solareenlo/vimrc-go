@@ -131,13 +131,28 @@ for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
 }
 endsnippet
 
+snippet fori1 "for int loop"
+for ${2:i} := 1; $2 <= ${1:count}; $2${3:++} {
+}
+endsnippet
+
 snippet forj "for int loop"
 for ${2:j} := 0; $2 < ${1:count}; $2${3:++} {
 }
 endsnippet
 
+snippet forj1 "for int loop"
+for ${2:j} := 1; $2 <= ${1:count}; $2${3:++} {
+}
+endsnippet
+
 snippet fork "for int loop"
 for ${2:k} := 0; $2 < ${1:count}; $2${3:++} {
+}
+endsnippet
+
+snippet fork1 "for int loop"
+for ${2:k} := 1; $2 <= ${1:count}; $2${3:++} {
 }
 endsnippet
 
@@ -3919,5 +3934,28 @@ func count(slice []int, target int) int {
 		}
 	}
 	return count
+}
+endsnippet
+
+snippet rotate "Rotate"
+func rotate(slice []int, middle int) {
+	if middle == 0 || middle == len(slice) {
+		return
+	}
+
+	reverse(slice[:middle])
+	reverse(slice[middle:])
+	reverse(slice)
+}
+
+func reverse(slice []int) {
+	i := 0
+	j := len(slice) - 1
+
+	for i < j {
+		slice[i], slice[j] = slice[j], slice[i]
+		i++
+		j--
+	}
 }
 endsnippet
