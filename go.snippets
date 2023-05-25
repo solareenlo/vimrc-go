@@ -2793,6 +2793,26 @@ func SuffixArrayString(s string) []int {
 	return SAIS(s2, 255, 10, 40)
 }
 
+func SuffixArrayInt(s []int) []int {
+	n := len(s)
+	idx := make([]int, n)
+	for i := range idx {
+		idx[i] = i
+	}
+	sort.Slice(idx, func(l, r int) bool {
+		return s[idx[l]] < s[idx[r]]
+	})
+	s2 := make([]int, n)
+	now := 0
+	for i := 0; i < n; i++ {
+		if i != 0 && s[idx[i-1]] != s[idx[i]] {
+			now++
+		}
+		s2[idx[i]] = now
+	}
+	return SAIS(s2, now, 10, 40)
+}
+
 func SANaive(ss []int) []int {
 	s := make([]int, len(ss))
 	copy(s, ss)
@@ -3958,4 +3978,8 @@ func reverse(slice []int) {
 		j--
 	}
 }
+endsnippet
+
+snippet rand "Rand"
+r := rand.New(rand.NewSource(time.Now().UnixNano()))
 endsnippet
