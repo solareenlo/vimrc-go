@@ -537,26 +537,20 @@ sort.Ints(keys)
 endsnippet
 
 snippet reverseOrderInt "Reverse order Int slice"
-func reverseOrderInt(a []int) []int {
+func reverseOrderInt(a []int) {
 	n := len(a)
-	res := make([]int, n)
-	n = copy(res, a)
 	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
-		res[i], res[j] = res[j], res[i]
+		a[i], a[j] = a[j], a[i]
 	}
-	return res
 }
 endsnippet
 
 snippet reverseOrderString "Reverse order String slice"
-func reverseOrderString(a []string) []string {
+func reverseOrderString(a []string) {
 	n := len(a)
-	res := make([]string, n)
-	n = copy(res, a)
 	for i, j := 0, n-1; i < j; i, j = i+1, j-1 {
-		res[i], res[j] = res[j], res[i]
+		a[i], a[j] = a[j], a[i]
 	}
-	return res
 }
 endsnippet
 
@@ -1123,6 +1117,28 @@ func nCrMod(n, r int) int {
 	}
 	return fact[n] * invf[r] % MOD * invf[n-r] % MOD
 }
+endsnippet
+
+snippet nCrMod3 "Calculate nCr mod"
+	const mod = 998244353
+	const size = 3000
+	var nr [2 * (size + 1)][2 * (size + 1)]int
+	nr[0][0] = 1
+	for i := 0; i < size+1; i++ {
+		for j := 0; j < size+1; j++ {
+			nr[i][j+1] += nr[i][j]
+			nr[i][j+1] %= mod
+			nr[i+1][j] += nr[i][j]
+			nr[i+1][j] %= mod
+		}
+	}
+	var nCr func(int, int) int
+	nCr = func(n, r int) int {
+		if n < r || r < 0 {
+			return 0
+		}
+		return nr[n-r][r]
+	}
 endsnippet
 
 snippet HeapPair "Set Heap Pair"
